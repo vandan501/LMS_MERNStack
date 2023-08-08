@@ -1,0 +1,5 @@
+--> first make a server folder
+after making server folder write---> npm init .....package.json file will be generated
+
+Now download some dependencies ...
+npm install bcryptjs cloudinary cookie-parser cors dotenv jsonwebtoken express mongoose multer nodemailer --save 
