@@ -1,7 +1,7 @@
 import { Schema ,model} from "mongoose";
 import  bcrypt  from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
+import crypto from 'crypto';
 const userSchema=new Schema({
 fullName:{
     type:'String',
@@ -48,7 +48,7 @@ forgotPasswordExpiry:Date
 }
 );
 
-userSchema.pre('save',async function(save){
+userSchema.pre('save',async function(next){
     if(!this.isModified('password')){
         next();
         this.password=await bcrypt.hash(this.password,10)
@@ -56,28 +56,32 @@ userSchema.pre('save',async function(save){
 })
 
 
-userSchema.methods= {
-genereteJWTToken: async function()
-{
-    return await jwt.sign(
-        {
-        id: this._id,
-        email: this.email,
-        subscription: this.subscription,
-        role: this.role
-        },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: process.env.JWT_EXPIRY,
-        }
-        
-    )
-},
-confirmPassword:async function(plainTextPassword){
-        return await bcrypt.compare(plainTextPassword,this.password)
-}
-}
+userSchema.methods = {
+    generateJWTToken: async function() {
+        return await jwt.sign(
+            { id: this._id, email: this.email, subscription: this.subscription, role: this.role },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: process.env.JWT_EXPIRY,
+            }
+        )
+    },
+    comparePassword: async function(plainTextPassword) {
+        return await bcrypt.compare(plainTextPassword, this.password);
+    },
+    generatePasswordResetToken:async function(){
+        const resetToken=crypto.randomBytes(20).toString('hex');
 
+
+        this.forgotPasswordToken=crypto
+            .createHash('sha256')
+            .update(resetToken)
+            .digest('hex')
+            ;
+        this.forgotPasswordExpiry=Date.now() + 15 * 60 *1000;//15 min from now
+        return resetToken;
+    }
+}
 
 const User=model('User',userSchema);
 
