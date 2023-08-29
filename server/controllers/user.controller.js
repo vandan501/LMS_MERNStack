@@ -7,8 +7,8 @@ import crypto from 'crypto';
 
 const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
-  httpOnly: true,
-  secure: true,
+  httpOnly: false,  //true 
+  secure: false,    //true
 };
 
 const register = async (req, res , next ) => {
@@ -23,6 +23,7 @@ const register = async (req, res , next ) => {
     if (userExiest) {
       return next(new AppError("Email Already exiest", 400));
     }
+
     const user = await User.create({
       fullName,
       email,
@@ -67,9 +68,9 @@ const register = async (req, res , next ) => {
 
     user.password = undefined;
 
-    const token = await user.generateJWTToken()
+    const token = await user.generateJWTToken();
 
-    res.cookie("token", token, cookieOptions);
+    res.cookie("token", token, cookieOptions)
 
     res.status(200).json({
       success: true,
@@ -77,6 +78,7 @@ const register = async (req, res , next ) => {
       user,
     });
   
+
 };
 
 const login = async (req, res, next) => {
@@ -101,13 +103,14 @@ const login = async (req, res, next) => {
       success: true,
       message: "user login successfully",
     });
-
+console.log("token :",token);
   } catch (e) {
     return next(new AppError(e.message, 500));
   }
 };
 
 const logout = (req, res) => {
+
   res.cookie('token', null, {
       secure: true,
       maxAge: 0,
@@ -210,7 +213,7 @@ const  resetPassword=async(req,res,next)=>{
 
   }
 
-  const changePassword = async (req, res) => {
+  const changePassword = async (req, res , next) => {
     const { oldPassword, newPassword } = req.body;
     const { id } = req.user;
 
@@ -248,11 +251,11 @@ const  resetPassword=async(req,res,next)=>{
     });
 }
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res , next) => {
   const { fullName } = req.body;
-  const { id } = req.user.id;
+  const { email } = req.user.email;
 
-  const user = await User.findById(id);
+  const user = await User.findById(email);
 
   if (!user) {
       return next(

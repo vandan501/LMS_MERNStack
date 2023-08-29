@@ -1,6 +1,6 @@
 //import http module 
 import http from 'http';
-import { app } from './app.mjs';
+import  app  from './app.mjs';
 import connectionToDB from './config/dbConnection.js';
 import cloudinary from 'cloudinary';
 const PORT= 5000 || process.env.PORT;

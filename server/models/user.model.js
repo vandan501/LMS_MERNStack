@@ -2,6 +2,9 @@ import { Schema ,model} from "mongoose";
 import  bcrypt  from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+
+
+
 const userSchema=new Schema({
 fullName:{
     type:'String',
@@ -18,13 +21,16 @@ email:{
     lowercase:true,
     trim:true,
     unique:true,
+    match: [
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        'Please fill in a valid email address',
+    ],
    
 },
 password:{
     type:'String',
     required:[true,"Password is Required"],
     minLength:[8,"Password must be atleast 8 charchter"],
-    maxLength:[50,"Password should be less than 50 charchter"],
     select:false
 },
 avatar:{
@@ -41,31 +47,37 @@ role:{
         default:'USER'
 },
 forgotPasswordToken:String,
-forgotPasswordExpiry:Date
+forgotPasswordExpiry:Date,
 },
 {
     timestamps:true
 }
 );
 
-userSchema.pre('save',async function(next){
+userSchema.pre('save',async function(next)
+{
     if(!this.isModified('password')){
-        next();
-        this.password=await bcrypt.hash(this.password,10)
+       return next();
     }
+        this.password=await bcrypt.hash(this.password,10)
+    
 })
 
 
 userSchema.methods = {
     generateJWTToken: async function() {
         return await jwt.sign(
-            { id: this._id, email: this.email, subscription: this.subscription, role: this.role },
+            { id: this._id, 
+                email: this.email, 
+                subscription: this.subscription, 
+                role: this.role },
             process.env.JWT_SECRET,
             {
                 expiresIn: process.env.JWT_EXPIRY,
             }
         )
     },
+
     comparePassword: async function(plainTextPassword) {
         return await bcrypt.compare(plainTextPassword, this.password);
     },
