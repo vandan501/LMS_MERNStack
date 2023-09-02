@@ -3,7 +3,7 @@
 function App() {
   return (
    <>
-   LMS frontend
+lms
    </>
   );
 }

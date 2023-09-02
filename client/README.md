@@ -21,3 +21,33 @@
 
     npm run start
 
+***********************************************************************    
+
+### Setup Instructions for tailwind
+***********************************************************************    
+[Tailwind official instruction doc(https://tailwindcss.com/docs/installation)]
+
+***********************************************************************    
+1. Install Tailwind css--> npm install -D tailwindcss
+
+***********************************************************************    
+2. Install config file of Tailwind using -->npx tailwind init
+
+***********************************************************************    
+3. add file extensions in congif file
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+    content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+    theme: {
+     extend: {},
+    },
+    plugins: [],
+    }
+
+4. add the tailwind directives in the index.css
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;    
+
+
+
