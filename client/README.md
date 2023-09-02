@@ -43,11 +43,16 @@
     },
     plugins: [],
     }
+***********************************************************************    
 
 4. add the tailwind directives in the index.css
         @tailwind base;
         @tailwind components;
         @tailwind utilities;    
 
+***********************************************************************    
 
+### Adding Plugins and dependencies 
+ 
+ npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwind/line-clamp
 
