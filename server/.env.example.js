@@ -1,0 +1,23 @@
+NODE_ENV = development
+
+PORT = 5015
+
+MONGO_URI = mongodb+srv://shivam1337:shivam1337@cluster0.hcqcdet.mongodb.net/lms?retryWrites=true&w=majority
+
+JWT_SECRET = 237dc14c874f6dcc6df556e1b43bf2da0a8da436fce45e0ae47c003d07ca81ee
+JWT_EXPIRY = 7d
+
+CLOUDINARY_CLOUD_NAME = du9jzqlpt
+CLOUDINARY_API_KEY = 632916869255434
+CLOUDINARY_API_SECRET = 5HoLfDmp7SMNZHB0h81Sdt6tLFo
+
+SMTP_HOST = smtp.mailtrap.io
+SMTP_PORT = 2525
+SMTP_USERNAME = 0fa52bf7e2f60f
+SMTP_PASSWORD = 6b8eda5a254e06
+SMTP_FROM_EMAIL = no_reply@pwskills.com
+
+RAZORPAY_KEY_ID = rzp_test_IKBIG5hmA1fSbO
+RAZORPAY_SECRET = ucyEOGBIH0RsZTv0f2RgEhur
+RAZORPAY_PLAN_ID = plan_MFIQFlWnHDzCsO
+

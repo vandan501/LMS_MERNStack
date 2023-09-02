@@ -5,6 +5,7 @@ import dotenv from 'dotenv'; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 import morgan from 'morgan';
 import userRoutes from './routes/user.routes.js';
+import paymentRoutes from './routes/payment.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import courseRoutes from './routes/course.routes.js';
 const app=express();
@@ -29,6 +30,7 @@ res.send('Pong');
 
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/course',courseRoutes);
+app.use('/api/v1/payments',paymentRoutes);
 
 
 
