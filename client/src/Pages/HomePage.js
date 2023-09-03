@@ -17,7 +17,7 @@ return (
                   Online Courses
             </span>
         </h1>
-        <p className="text-xl text-gray-400"> We have large library of courses thaught by highly skilled and qualified faculties at a very affordable cost.</p>
+        <p className="text-xl text-gray-900"> We have large library of courses thaught by highly skilled and qualified faculties at a very affordable cost.</p>
             <div className="space-x-6">
                 <Link to="/courses"> 
                     <button className="bg-yellow-400 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-500 transition-all ease-in-out text-white">
