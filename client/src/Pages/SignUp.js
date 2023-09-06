@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import  { useState } from "react";
 import toast from "react-hot-toast";
 import { BsPersonCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
@@ -7,9 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { isEmail, isValidPassword } from "../Helpers/regexMatcher.js";
 import HomeLayout from "../Layouts/HomeLayout.js";
 import { createAccount } from "../Redux/Slices/AuthSlice.js";
+
 function SignUp() {
-  const dispatch = useDispatch;
-  const navigate = useNavigate;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [previewImage, setPreviewImage] = useState("");
 
@@ -27,6 +30,8 @@ function SignUp() {
       [name]: value,
     });
   }
+
+
   function getImage(event) {
     event.preventDefault();
     // getting the image
@@ -37,10 +42,11 @@ function SignUp() {
         ...signupData,
         avatar: uploadedImage,
       });
+
+      
       const fileReader = new FileReader();
       fileReader.readAsDataURL(uploadedImage);
       fileReader.addEventListener("load", function () {
-        console.log(this.result);
         setPreviewImage(this.result);
       });
     }
@@ -58,6 +64,7 @@ function SignUp() {
       toast.error("Please fill all details!");
       return;
     }
+    
     // checking name field length
     if (signupData.fullName.length < 5) {
       toast.error("Name should be atleast of 5 characters");
@@ -84,6 +91,7 @@ function SignUp() {
 
     // dispatch create account action
     const response = await dispatch(createAccount(formData));
+    console.log(response);
     if (response?.payload?.success) navigate("/");
 
     setSignupdata({
