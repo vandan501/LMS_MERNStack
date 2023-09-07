@@ -109,8 +109,8 @@ console.log("token :",token);
   }
 };
 
-const logout = (req, res) => {
-
+const logout = (req, res,next) => {
+  try{
   res.cookie('token', null, {
       secure: true,
       maxAge: 0,
@@ -121,6 +121,11 @@ const logout = (req, res) => {
       success: true,
       message: 'User logged out successfully'
   })
+}
+catch(e)
+{
+  return next(new AppError(e.message,500));
+}
 };
 
 const getProfileDetails = async (req, res , next) => {

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Footer from "../Components/Footer";
+import { logout } from "../Redux/Slices/AuthSlice";
 // import { logout } from '../Redux/Slices/AuthSlice.js';
 
 
@@ -35,8 +36,8 @@ function HomeLayout({ children }) {
     async function handleLogout(e) {
       e.preventDefault();
 
-      // const res = await dispatch();
-      // if(res?.payload?.success)
+      const res = await dispatch(logout());
+      if(res?.payload?.success)
       navigate("/");
   }  
   
@@ -100,23 +101,8 @@ function HomeLayout({ children }) {
                 </li>
               )
             }
-            {
-              isLoggedIn && (
-                <li className="absolute bottom-4 w-[90%]">
-                <div className="w-full flex items-center justify-center">
-                <button className="btn-primary px-4 py-1 font-bold rounded-md w-full">
-                  <Link to="/user/Profile">Profile</Link>
-                </button>
-                
-                <button className="btn-secondary px-4 py-1 font-bold rounded-md w-full">
-                  <Link to="/Logout">Logout</Link>
-                </button>
-                </div>
-                </li>
-              )
-            }
             {isLoggedIn && (
-              <li className=" ">
+              <li className="absolute bottom-4 w-[90%]">
                   <div className="w-full flex items-center justify-center">
                       <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full'>
                           <Link to="/user/profile">Profile</Link>
