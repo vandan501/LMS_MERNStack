@@ -70,7 +70,7 @@ const register = async (req, res , next ) => {
 
     const token = await user.generateJWTToken();
 
-    res.cookie("token", token, cookieOptions)
+    res.cookie('token', token, cookieOptions)
 
     res.status(200).json({
       success: true,
@@ -101,9 +101,9 @@ const login = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "user login successfully",
+      message: "user login successfully"
     });
-console.log("token :",token);
+
   } catch (e) {
     return next(new AppError(e.message, 500));
   }
