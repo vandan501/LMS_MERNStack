@@ -8,7 +8,6 @@ const store=configureStore({
         auth:authSliceReducer,
         course:courseSliceReducer
     },
-    devTools:true
 })
 
 export default store;

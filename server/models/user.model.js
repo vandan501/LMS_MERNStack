@@ -58,21 +58,21 @@ subscription:{
 }
 );
 
-userSchema.pre('save',async function(next)
-{
-    if(!this.isModified('password')){
-       return next();
-    }
-        this.password=await bcrypt.hash(this.password,10)
-    
-});
-
+// Hashes password before saving to the database
+userSchema.pre('save', async function (next) {
+    // If password is not modified then do not hash it
+    if (!this.isModified('password')) return next();
+  
+    this.password = await bcrypt.hash(this.password, 10);
+  });
 
 userSchema.methods = {
 
-    comparePassword: async function (plainPassword) {
-        return await bcrypt.compare(plainPassword, this.password);
-      },
+        // method which will help us compare plain password with hashed password and returns true or false
+        comparePassword: async function (plainPassword) {
+          return await bcrypt.compare(plainPassword, this.password);
+        },
+      
 
     generateJWTToken: async function() {
         return await jwt.sign(
@@ -88,6 +88,7 @@ userSchema.methods = {
             }
         )
     },
+    
     generatePasswordResetToken:async function(){
         const resetToken=crypto.randomBytes(20).toString('hex');
 
