@@ -1,10 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import HomeLayout from "../..//Layouts/HomeLayout";
 function Profile() {
-  const dispatch = useDispatch();
 
   const userData = useSelector((state) => state?.auth?.data);
 
@@ -48,7 +47,7 @@ function Profile() {
             </Link>
           </div>
           {
-            userData?.subscription?.state !== "inactive" && (
+            userData?.subscription?.state === "inactive" && (
                 <button className="w-full bg-red-500 font-medium text-sm p-3 rounded-md  transition-all ease-in-out text-white duration-300 hover:bg-red-400 cursor-pointer text-center">
                 Cancel Subscription
                 </button>
