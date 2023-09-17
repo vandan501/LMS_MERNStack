@@ -42,9 +42,12 @@ const createCourse = async function (req, res, next) {
   try {
     const { title, description, category, createdBy } = req.body;
 
+    
     if (!title || !description || !category || !createdBy) {
-      return next(new AppError("All fileds are required", 400));
+      return next(new AppError("All fileds are Compulsory", 400));
     }
+
+    
     const course = await Course.create({
       title,
       description,
@@ -67,7 +70,7 @@ const createCourse = async function (req, res, next) {
         const result = await cloudinary.v2.uploader.upload(req.file.path, {
           folder: "lms",
         });
-        console.log(JSON.stringify(result));
+       
         if (result) {
           course.thumbnail.public_id = result.public_id;
           course.thumbnail.secure_url = result.secure_url;
@@ -154,7 +157,7 @@ const addLecturesByCourseId = async (req, res, next) => {
       const result = await cloudinary.v2.uploader.upload(req.file.path, {
         folder: "lms",
       });
-      console.log(JSON.stringify(result));
+      
       if (result) {
         lectureData.lecture.public_id = result.public_id;
         lectureData.lecture.secure_url = result.secure_url;

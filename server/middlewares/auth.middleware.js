@@ -7,10 +7,6 @@ const isLoggedIn = async (req, res, next) => {
         const { token } = req.cookies;
 
 
-        console.log("Token cookie set:", token);
-        console.log("req.cookies:", req.cookies);
-        console.log("req.headers:", req.headers); // Corrected from req.Headers
-        console.log("req.headers.cookies:", req.headers.cookies); // Corrected from req.Headers.cookies
 
         
         if (!token) {
