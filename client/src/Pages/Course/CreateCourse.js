@@ -68,12 +68,12 @@ async function onFormSubmit(e) {
 }
   return (
     <HomeLayout>
-      <div className="flex items-center justify-center h-[100vh]">
+      <div className="flex items-center justify-center h-[100vh] bg-slate-300">
         <form
           onSubmit={onFormSubmit}
-          className="flex flex-col justify-center items-center gap-0 rounded-lg p-4 text-white w-[700px] my-10 shadow-[0_0_10px_black] relative"
+          className="flex flex-col justify-center items-center gap-0 rounded-lg p-4 text-white w-[700px] my-10 shadow-[0_0_10px_black] relative bg-white "
         >
-          <Link className="left-2 absolute top-6 text-2xl  link text-accent cursor-pointer">
+          <Link className="left-2 absolute top-6 text-2xl  link text-accent cursor-pointer" to="/">
             <AiOutlineArrowLeft className="text-black" />
           </Link>
           <h1 className="text-3xl mb-8 font-bold text-black text-center">
