@@ -12,7 +12,7 @@ const initialState = {
 
 
 
-
+//function for create a new account
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
   try {
     const res = axiosInstance.post("user/register", data);
@@ -49,6 +49,8 @@ export const login = createAsyncThunk("auth/login", async (data) => {
     toast.error(error.message);
   }
 });
+
+//function for logout
 export const logout=createAsyncThunk("/auth/logout",async ()=>{
   try {
     const res = axiosInstance.get("user/logout");
@@ -59,6 +61,35 @@ export const logout=createAsyncThunk("/auth/logout",async ()=>{
       },
       error: "Failed to logout",
     });
+    return (await res).data;
+    
+  } catch (error) {
+    toast.error(error?.response?.data?.message);    
+  }
+})
+
+//update profile function
+export const updateProfile = createAsyncThunk("/user/update/profile", async (data) => {
+  try {
+      const res = axiosInstance.put(`user/update/${data[0]}`, data[1]);
+      toast.promise(res, {
+          loading: "Wait! profile update in progress...",
+          success: (data) => {
+              return data?.data?.message;
+          },
+          error: "Failed to update profile"
+      });
+      return (await res).data;
+  } catch(error) {
+      toast.error(error?.response?.data?.message);
+  }
+})
+
+
+//get USer data after update profile
+export const getUserData=createAsyncThunk("/user/details",async ()=>{
+  try {
+    const res = axiosInstance.get("user/profile");
     return (await res).data;
     
   } catch (error) {
@@ -85,13 +116,29 @@ const authSlice = createSlice({
 
 })
 // for user logout
-      .addCase(logout.fulfilled, (state) => {
+.addCase(logout.fulfilled, (state) => {
         localStorage.clear();
         state.isLoggedIn = false;
         state.data = {};
         state.role = "";
-    })
-    }
+})
+// get user details after update
+.addCase(getUserData.fulfilled, (state, action) => {
+  localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+  localStorage.setItem("isLoggedIn", true);
+  localStorage.setItem("role", action?.payload?.user?.role);
+  state.isLoggedIn = true;
+  state.data = action?.payload?.user ;
+  state.role = action?.payload?.user?.role;
+
+})
+
+
+}
 });
+
+
+
+
 // export const {}=authSlice.actions;
 export default authSlice.reducer;

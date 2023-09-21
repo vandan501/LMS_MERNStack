@@ -299,6 +299,14 @@ const updateUser = async (req, res , next) => {
               fs.rm(`uploads/${req.file.filename}`)
 
           }
+
+          await user.save();
+
+          res.status(200).json({
+              success: true,
+              message: 'User details updated successfully!'
+          });
+        
       } catch(e) {
           return next(
               new AppError(e || 'File not uploaded, please try again', 500)
@@ -306,12 +314,6 @@ const updateUser = async (req, res , next) => {
       }
   }
 
-  await user.save();
-
-  res.status(200).json({
-      success: true,
-      message: 'User details updated successfully!'
-  });
 
 }
 
