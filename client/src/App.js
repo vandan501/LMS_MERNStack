@@ -14,6 +14,7 @@ import HomePage from './Pages/HomePage.js';
 import Login from './Pages/Login';
 import NotFound from './Pages/NotFound';
 import Checkout from './Pages/Payment/Checkout';
+import CheckoutFail from './Pages/Payment/CheckoutFail.js';
 import CheckoutSuccess from './Pages/Payment/CheckoutSuccess.js';
 import SignUp from './Pages/SignUp';
 import Editprofile from './Pages/User/Editprofile';
@@ -37,6 +38,7 @@ function App() {
         <Route path='/user/profile' element={<Profile />}> </Route>
         <Route path='/checkout' element={<Checkout />}> </Route>
         <Route path='/checkout/success' element={<CheckoutSuccess />}> </Route>
+        <Route path='/checkout/fail' element={<CheckoutFail />}> </Route>
         <Route path='/user/editprofile' element={<Editprofile />}> </Route>
       </Route>
      
