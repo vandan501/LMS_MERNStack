@@ -38,13 +38,11 @@ export const buySubscription = async (req, res, next) => {
       total_count: 6,
       quantity: 1,
     });
-    console.log(subscription);
     user.subscription.id = subscription.id;
     user.subscription.status = subscription.status;
 
     await user.save();
 
-    console.log(subscription.status);
 
     res.status(200).json({
       success: true,

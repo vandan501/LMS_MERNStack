@@ -39,7 +39,6 @@ const authorizeSubscriber = async (req, res, next) => {
 
         const user=await User.findById(req.user.id);
         
-        console.log(user)
 
         if (user.role !== "ADMIN" && user.subscription.status !== "active" ) {
             return next(
