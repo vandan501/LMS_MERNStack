@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "../../Layouts/HomeLayout";
 function CourseDescription() {
   const { state } = useLocation();
+  // console.log(state)
   const navigate=useNavigate();
 
   const { role, data } = useSelector((state) => state.auth);
@@ -36,11 +37,10 @@ function CourseDescription() {
                   {state?.createdBy}
                 </p>
               </div>
-              {role === "ADMIN" || data?.subscription?.status === "ACTIVE" ? (
-                <button className="bg-yellow-600 rounded-md px-5 py-3 w-full transition-all ease-in-out duration-300 text-xl hover:bg-yellow-500 font-semibold">
-                  Watch lectures
-                </button>
-              ) : (
+              {role === "ADMIN" || data?.subscription?.status === "active" ? (
+                <button onClick={() => navigate("/course/displaylectures", { state: { ...state } })} className="bg-yellow-600 rounded-md px-5 py-3 w-full transition-all ease-in-out duration-300 text-xl hover-bg-yellow-500 font-semibold">
+  Watch lectures
+</button>  ) : (
                 <button onClick={()=>navigate("/checkout")} className="bg-yellow-600 rounded-md px-5 py-3 w-full transition-all ease-in-out duration-300 text-xl hover:bg-yellow-500 font-semibold">
                   Subscribe Now
                 </button>

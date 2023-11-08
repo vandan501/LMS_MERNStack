@@ -9,6 +9,8 @@ import Contact from './Pages/Contact';
 import CourseDescription from './Pages/Course/CourseDescription';
 import CourseList from './Pages/Course/CourseList';
 import CreateCourse from './Pages/Course/CreateCourse';
+import Addlecture from './Pages/Dashboard/Addlecture.js';
+import Displaylectures from './Pages/Dashboard/Displaylectures.js';
 import Denied from './Pages/Denied';
 import HomePage from './Pages/HomePage.js';
 import Login from './Pages/Login';
@@ -32,12 +34,14 @@ function App() {
        <Route path='/denied' element={<Denied />}> </Route>
       
       <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
+      <Route path='/course/addlecture' element={<Addlecture />}> </Route> 
          <Route path='/course/create' element={<CreateCourse />}> </Route>
       </Route>
       <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>}>
         <Route path='/user/profile' element={<Profile />}> </Route>
-        <Route path='/checkout' element={<Checkout />}> </Route>
         <Route path='/checkout/success' element={<CheckoutSuccess />}> </Route>
+        <Route path='/checkout' element={<Checkout />}> </Route>
+        <Route path='/course/displaylectures' element={<Displaylectures />}> </Route>
         <Route path='/checkout/fail' element={<CheckoutFail />}> </Route>
         <Route path='/user/editprofile' element={<Editprofile />}> </Route>
       </Route>
