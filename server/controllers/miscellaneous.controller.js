@@ -1,10 +1,9 @@
 
-import asyncHandler from '../middlewares/asyncHandler.middleware.js';
 import User from '../models/user.model.js';
-import AppError from '../utils/AppError.js';
+import AppError from '.././utils/error.util.js';
 import sendEmail from '../utils/sendEmail.js';
 
-export const contactUs = asyncHandler(async (req, res, next) => {
+export const contactUs = async (req, res, next) => {
   // Destructuring the required data from req.body
   const { name, email, message } = req.body;
 
@@ -28,16 +27,17 @@ export const contactUs = asyncHandler(async (req, res, next) => {
     success: true,
     message: 'Your request has been submitted successfully',
   });
-});
+};
 
 
-export const userStats = asyncHandler(async (req, res, next) => {
+export const userStats = async (req, res, next) => {
   const allUsersCount = await User.countDocuments();
-
+  console.log("allUsersCount from backend:",allUsersCount);
   const subscribedUsersCount = await User.countDocuments({
     'subscription.status': 'active', 
     // subscription.status means we are going inside an object and we have to put this in quotes
   });
+  console.log("subscribedUsersCount from",subscribedUsersCount);
 
   res.status(200).json({
     success: true,
@@ -45,4 +45,4 @@ export const userStats = asyncHandler(async (req, res, next) => {
     allUsersCount,
     subscribedUsersCount,
   });
-});
+};

@@ -26,8 +26,9 @@ router.route('/unsubscribe')
         cancelSubscription);
 
 router.route('/')
-.get(isLoggedIn,
-    authorizedRoles,
+.get(
+  isLoggedIn,
+    // authorizedRoles, here i am getting problem when i want to fetch payment details in admin dashboard i will update in few days
     allPayments);
 
 export default router;

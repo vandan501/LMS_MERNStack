@@ -43,21 +43,25 @@ export const verifyUserPayment = createAsyncThunk("/payments/verify", async (dat
     }
 })
 
+
+
+
 export const getPaymentRecord = createAsyncThunk("/payments/record", async () => {
     try {
-        const response = await axiosInstance.get("/payments?count=100");
+        const response = axiosInstance.get("/payments?count=100", );
         toast.promise(response, {
-            loading: "getting the payments records",
+            loading: "Getting the payment records",
             success: (data) => {
-                return data?.data?.message;
+                return data?.data?.message
             },
-            error: "failed to get payment records" 
-        });
+            error: "Failed to get payment records"
+        })
         return (await response).data;
-    } catch (error) {
+    } catch(error) {
         toast.error("Operation failed");
     }
-})
+});
+
 
 // function to cancel the course bundle subscription
 export const cancelCourseBundle = createAsyncThunk("payments/cancel",
