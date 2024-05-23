@@ -20,7 +20,7 @@ function CourseList() {
 
 return (
     <HomeLayout>
-    <div className="min-h-[90vh] pt-12 pl-20 flex flex-col gap-10 text-black">
+    <div className="min-h-[100vh] pt-12  pl-20 flex flex-col gap-10 text-black">
       <h1 className="text-blue-700 text-4xl font-semibold text-center">
         Explore the courses made by{" "}
         <span className="text-red-500 text-4xl font-bold">

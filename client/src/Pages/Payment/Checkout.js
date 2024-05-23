@@ -47,7 +47,7 @@ function Checkout() {
         email: userData.email,
         name: userData.fullName,
       },
-      name: "Vandan Courses Pvt. Ltd.",
+      name: "AcademixHub Pvt. Ltd.",
       description: "subscription",
       handler: async function (response) {
         (paymentDetails.razorpay_payment_id = response.razorpay_payment_id),

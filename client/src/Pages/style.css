@@ -1,0 +1,76 @@
+/* hero section5 */
+.hero-section5 {
+    margin-top: 10%;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .hero-section5 .card-sec {
+    width: 90%;
+    position: relative;
+    display: flex;
+    height: min-content;
+    padding: 59px 0px 0px 0px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+  }
+  .hero-section5 .card-sec .card {
+    width: auto;
+    height: min-content;
+    top: 8px;
+    position: relative;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    align-items: start;
+  }
+  .card .left-side {
+    width: 800px;
+    height: 327.94px;
+    position: relative;
+    padding-left: 7%;
+  }
+  .div-2img {
+    width: 400px;
+    height: 429px;
+    position: relative;
+  }
+  .card .left-side {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 8%;
+  }
+  .card .left-side h3 {
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .card .left-side h1 {
+    font-family: Open Sans;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .card .left-side p {
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .start-btn {
+    cursor: pointer;
+  }
+  
+  /* end of hero section5 */
